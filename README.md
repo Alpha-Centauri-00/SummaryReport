@@ -1,1 +1,3 @@
 # SummaryReport
+
+![Test](SummaryReport.png)
