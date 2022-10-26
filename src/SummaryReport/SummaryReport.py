@@ -279,7 +279,8 @@ class SummaryReport:
                         td(e)
                 div(self.dt_string,cls="dt_time")
         
-        os.startfile(self.open_user_profile)
+        open_report = self.open_user_profile + "\Sammary.html"
+        os.startfile(open_report)
         
         with open(f"{self.user_profile}Sammary.html","w+") as file:
             file.write(doc.render())
