@@ -4,7 +4,7 @@ import dominate
 from dominate.tags import *
 import os
 from robot.api.deco import library
-
+import sys
 
 css = """
   
@@ -288,5 +288,9 @@ class SummaryReport:
             file.write(css)
         
     
-tt = SummaryReport()
-tt.parse_xml_html("E:\\Testing\\xml_report_py\\results\\output.xml")
+if __name__ == "__main__":
+    original_output_xml = sys.argv[1]
+    if not os.path.isfile(original_output_xml):
+        raise FileNotFoundError(f'{original_output_xml} is not a valie xml path')
+    sr = SummaryReport()
+    sr.parse_xml_html(original_output_xml)
