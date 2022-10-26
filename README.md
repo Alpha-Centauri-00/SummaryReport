@@ -1,3 +1,3 @@
 # SummaryReport
 
-![Test](sr.png)
+![Test](s_r.png)
