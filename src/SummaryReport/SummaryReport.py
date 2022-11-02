@@ -1,10 +1,10 @@
-import xml.etree.ElementTree as ET
+#import xml.etree.ElementTree as ET
+import os
+import sys
 from datetime import datetime
 import dominate
 from dominate.tags import *
-import os
-from robot.api.deco import library
-import sys
+from robot.api import ExecutionResult, ResultVisitor
 
 css = """
   
@@ -189,15 +189,13 @@ animation:p 1s .5s both;
 
 """
 
-@library(scope="GLOBAL")
-class SummaryReport:
-    
-    ROBOT_LISTENER_API_VERSION = 1
+
+class SummaryReport(ResultVisitor):
     
     def __init__(self) -> None:
 
-        self.title_doc = "No docu found"
-        self.title_disc = 'Lorem ipsum ...'
+        self.title_doc = "Title is editable"
+        self.title_disc = 'Documentation is also editable after exporting the report\nLorem ipsum ...'
         self.test_cases = []
         self.test_cases_status = []
         self.test_cases_start = []
@@ -206,25 +204,16 @@ class SummaryReport:
         self.user_profile = self.homdir + "\\"
         self.open_user_profile = os.path.realpath(self.user_profile)
 
-
-    def parse_xml_html(self,xml_path):
-        now = datetime.now()
-        self.dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
-        tree = ET.parse(xml_path)
-        root = tree.getroot()
-        # test case name
-        for x in root.findall(".//suite/test"):
-            self.test_cases.append(x.attrib["name"])
-        # test case status
-        for x in root.findall(".//test/status"):
-            self.test_cases_status.append(x.attrib["status"])
-        # test case starttime
-        for x in root.findall(".//test/status"):
-            self.test_cases_start.append(x.attrib["starttime"][8:])
-        # test case endtime
-        for x in root.findall(".//test/status"):
-            self.test_cases_ended.append(x.attrib["endtime"][8:])
-
+    def visit_test(self, test):
+        test_names = test.name
+        test_status = test.status
+        started_at = test.starttime
+        ended_at = test.endtime
+        self.test_cases.append(test_names)
+        self.test_cases_status.append(test_status)
+        self.test_cases_start.append(self._format_robot_timestamp(started_at))
+        self.test_cases_ended.append(self._format_robot_timestamp(ended_at))
+        
         self.All_tests_count = len(self.test_cases)
         self.Passes = self.test_cases_status.count("PASS")
         self.Failes = self.test_cases_status.count("FAIL")
@@ -233,8 +222,14 @@ class SummaryReport:
         self.Passes_pec = round((self.Passes / self.All_tests_count)*100,2)
         self.Failes_pec = round((self.Failes / self.All_tests_count)*100,2)
         self.Skipes_pec = round((self.Skipes / self.All_tests_count)*100,2)
+        now = datetime.now()
+        self.dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
         self.generate_html()
-        
+
+    def _format_robot_timestamp(self, timestamp):
+        dt = datetime.strptime(timestamp,'%Y%m%d %H:%M:%S.%f')
+        tt = dt.strftime('%H:%M:%S.%f')
+        return tt
 
     def generate_html(self):
         doc = dominate.document(title="Repo-Reporting")
@@ -293,5 +288,5 @@ if __name__ == "__main__":
     original_output_xml = sys.argv[1]
     if not os.path.isfile(original_output_xml):
         raise FileNotFoundError(f'{original_output_xml} is not a valie xml path')
-    sr = SummaryReport()
-    sr.parse_xml_html(original_output_xml)
+    result = ExecutionResult(original_output_xml)
+    result.visit(SummaryReport())
