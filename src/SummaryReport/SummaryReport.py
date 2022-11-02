@@ -1,4 +1,3 @@
-#import xml.etree.ElementTree as ET
 import os
 import sys
 from datetime import datetime
@@ -7,8 +6,6 @@ from dominate.tags import *
 from robot.api import ExecutionResult, ResultVisitor
 
 css = """
-  
-}
 th,
 td {
     padding: 12px;
@@ -36,15 +33,15 @@ tr {
     
 }
 th, td {
-text-align: left;
-padding: 16px;
-color: black;
+    text-align: left;
+    padding: 16px;
+    color: black;
 }
 th{
     border-bottom: 2px solid #aaa;
 }
 tr:nth-child(even) {
-background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 body {
     padding: 20px;
@@ -130,25 +127,25 @@ h1 {
 }
 .pie:before,
 .pie:after {
-content:"";
-position:absolute;
-border-radius:50%;
+    content:"";
+    position:absolute;
+    border-radius:50%;
 }
 .pie:before {
-inset:0;
-background:
-radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
-conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
--webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+    inset:0;
+    background:
+    radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
+    conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
+    -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
         mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
 }
 .pie:after {
-inset:calc(50% - var(--b)/2);
-background:var(--c);
-transform:rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+    inset:calc(50% - var(--b)/2);
+    background:var(--c);
+    transform:rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
 }
 .animate {
-animation:p 1s .5s both;
+    animation:p 1s .5s both;
 }
 .piepass{
     --c:#97bd61;
