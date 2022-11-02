@@ -8,7 +8,7 @@ Usage
 - install requirements  
 
 ```bash
-pip install -r req.txt
+pip install -r requirements.txt
 ```
 - after that cd to SummaryReport directory
 - finally run the following command
