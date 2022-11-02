@@ -1,2 +1,1 @@
-dominate
-robotframework
+dominate==2.7.0
