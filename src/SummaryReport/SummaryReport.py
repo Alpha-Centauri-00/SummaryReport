@@ -197,9 +197,6 @@ class SummaryReport(ResultVisitor):
         self.test_cases_status = []
         self.test_cases_start = []
         self.test_cases_ended = []
-        self.homdir = os.path.expanduser("~")
-        self.user_profile = self.homdir + "\\"
-        self.open_user_profile = os.path.realpath(self.user_profile)
 
     def visit_test(self, test):
         test_names = test.name
@@ -271,13 +268,13 @@ class SummaryReport(ResultVisitor):
                         td(e)
                 div(self.dt_string,cls="dt_time")
         
-        open_report = self.open_user_profile + "\Sammary.html"
-        os.startfile(open_report)
-        
-        with open(f"{self.user_profile}Sammary.html","w+") as file:
+        if not os.path.exists("Test_results"):
+            os.makedirs("Test_results")
+
+        with open("Test_results/Summary.html", "w+") as file:
             file.write(doc.render())
 
-        with open(f"{self.user_profile}style.css","w+") as file:
+        with open("Test_results/style.css", "w") as file:
             file.write(css)
         
     
