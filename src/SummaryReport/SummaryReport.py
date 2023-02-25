@@ -18,14 +18,17 @@ class SummaryReport(ResultVisitor):
         self.test_cases_status = []
         self.test_cases_start = []
         self.test_cases_ended = []
+        self.fail_error_msg = []
 
     def visit_test(self, test):
         test_names = test.name
         test_status = test.status
         started_at = test.starttime
         ended_at = test.endtime
+        error_msg = test.message
         self.test_cases.append(test_names)
         self.test_cases_status.append(test_status)
+        self.fail_error_msg.append(error_msg)
         self.test_cases_start.append(self._format_robot_timestamp(started_at))
         self.test_cases_ended.append(self._format_robot_timestamp(ended_at))
         
@@ -73,12 +76,14 @@ class SummaryReport(ResultVisitor):
                 with table().add(tbody()):
                     with tr():
                         th("Test Case")
+                        th("Msg")
                         th("Status")
                         th("Started")
                         th("Ended")
-                    for x,y,s,e in zip (self.test_cases,self.test_cases_status,self.test_cases_start,self.test_cases_ended):
+                    for x,z,y,s,e in zip (self.test_cases,self.fail_error_msg,self.test_cases_status,self.test_cases_start,self.test_cases_ended):
                         tr()
                         td(x)
+                        td(z)
                         if y == "PASS":
                             td(span(y,cls="label Pass"))
                         if y == "SKIP":
