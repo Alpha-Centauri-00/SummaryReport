@@ -1,12 +1,31 @@
 
 css = """
-th,
 td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
     
 }
+
+th {
+    resize: horizontal;
+    border: 1px solid black;
+    padding: 10;
+    margin: 0px;
+    overflow: auto;
+    width: auto;
+    height: 66px;
+    min-height: 20px;
+    min-width: 20px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #97bd61;
+    color: white;
+    
+    }
+
 table {
     border-collapse: collapse;
     /* border: 1px solid #bdc3c7; */
@@ -15,10 +34,7 @@ table {
     border-radius: 0.5em;
     
 }
-tr {
-    transition: all .2s ease-in;
-    cursor: pointer;
-}
+
 .edit{
     /* contenteditable:true; */
     -webkit-user-modify:read-write-plaintext-only;
@@ -26,17 +42,13 @@ tr {
     font-family: 'Courier New', Courier, monospace;
     
 }
-th, td {
+td {
     text-align: left;
     padding: 16px;
     color: black;
 }
-th{
-    border-bottom: 2px solid #aaa;
-}
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+
+
 body {
     padding: 20px;
     margin: 20;
