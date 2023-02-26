@@ -1,75 +1,67 @@
 
 css = """
-td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    
+
+.content-table {
+    border-collapse: collapse;
+    margin: 70px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 20px rgba(0 0 0 / 25%);
 }
 
 th {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
     resize: horizontal;
-    border: 1px solid black;
-    padding: 10;
-    margin: 0px;
     overflow: auto;
-    width: auto;
-    height: 66px;
-    min-height: 20px;
-    min-width: 20px;
-
+    height: 25px;
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: #97bd61;
+    background-color: #009879;
     color: white;
-    
-    }
-
-table {
-    border-collapse: collapse;
-    /* border: 1px solid #bdc3c7; */
-    width: 100%;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 0.5em;
-    
 }
 
+.content-table th,
+.content-table td{
+    padding: 12px 15px;
+}
+.content-table tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+
+
+
 .edit{
-    /* contenteditable:true; */
+    
     -webkit-user-modify:read-write-plaintext-only;
     color: black;
     font-family: 'Courier New', Courier, monospace;
     
 }
-td {
-    text-align: left;
-    padding: 16px;
-    color: black;
-}
 
 
-body {
-    padding: 20px;
-    margin: 20;
-    font-family: Arial, Helvetica, sans-serif;
-    /* background-color: #202325; */
-    background-color: rgb(255, 255, 255);
-}
+
 tr:hover {
     background-color: rgb(228, 226, 226);
     transform: scale(1);
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
 }
+
+
 h1 {
     font-weight: 600;
     text-align: center;
-    background-color: #009a91;
+    background-color: #009879;
     color: white;
     padding: 10px 0px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-family: 'Courier New', Courier, monospace;
 }
+
 .label.Pass{
     background-color: #97bd61;
     color: #fff;
@@ -87,6 +79,7 @@ h1 {
     font-weight: bold;  
     font-size:13px;
 }
+
 .label {
     text-align: center;
     padding: 2px 5px;
@@ -108,11 +101,7 @@ h1 {
     /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
     
 }
-.text_{
-    width: max-content;
-    float: left;
-    border: 1px solid blue;
-}
+
 .pie {
     --p:100;
     --b:22px;
@@ -131,6 +120,7 @@ h1 {
     /* color: #37a98c; */
     color: black;
 }
+
 .pie:before,
 .pie:after {
     content:"";
@@ -166,14 +156,7 @@ h1 {
     float: left;
     padding: 1%;
 }
-.dt_time{
-    padding-top: 5em;
-    padding-right: 1em;
-    text-align: right;
-    color: black;
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
-}
+
 .section { margin-bottom: 1em; color: black; cursor: pointer; font-family: 'Courier New', Courier, monospace; font-size: small; font-weight: bold;}
 
 .printer{
@@ -184,10 +167,11 @@ h1 {
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
 }
+
 @media print {
-  #printPageButton {
-    display: none;
+    #printPageButton {
+      display: none;
+    }
   }
-}
 
 """
