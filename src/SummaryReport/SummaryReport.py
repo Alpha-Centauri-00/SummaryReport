@@ -56,7 +56,7 @@ class SummaryReport(ResultVisitor):
             link(rel='stylesheet', href='style.css')
            
         with doc:
-            style(css)
+            #style(css)
             with div(cls="container"):
                 h1("Test Summary Report!")
                 h3(self.title_doc,cls="edit")
@@ -73,7 +73,7 @@ class SummaryReport(ResultVisitor):
                 section("Fail Test cases ",self.Failes,cls="section")
                 section("Skip Test cases ",self.Skipes,cls="section")
                 section("Total Test cases ",self.All_tests_count,cls="section")
-                with table().add(tbody()):
+                with table(cls="content-table").add(tbody()):
                     with tr():
                         th("Test Case")
                         th("Msg")
