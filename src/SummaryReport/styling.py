@@ -1,6 +1,7 @@
 
 css = """
 
+
 .content-table {
     border-collapse: collapse;
     margin: 70px 0;
@@ -173,5 +174,7 @@ h1 {
       display: none;
     }
   }
+
+
 
 """
