@@ -97,7 +97,7 @@ class SummaryReport(ResultVisitor):
         if not os.path.exists("Test_results"):
             os.makedirs("Test_results")
 
-        with open("Test_results/Summary.html", "w+") as file:
+        with open("Test_results/Summary.html", "w", encoding='utf-8') as file:
             file.write(doc.render())
 
         with open("Test_results/style.css", "w") as file:
